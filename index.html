@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What Do I TIP – Tip Calculator & Bill Split Spinner</title>
+    <meta name="description" content="Smart tip calculator, bill splitter, and fun name spinner to decide who pays. Perfect for restaurants, delivery, and group dining.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="What Do I TIP – Tip Calculator & Bill Split Spinner">
+    <meta property="og:description" content="Calculate tips, split bills fairly, and spin the wheel to decide who pays the bill.">
+    <meta property="og:image" content="https://whatdoitip.com/og-image.png">
+    <meta property="og:url" content="https://whatdoitip.com">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1 class="logo-text">What Do I TIP</h1>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link active">Home</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <a href="privacy.html" class="nav-link">Privacy</a>
+                    <a href="terms.html" class="nav-link">Terms</a>
+                    <a href="cookies.html" class="nav-link">Cookies</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-heading">Not sure what to tip? We got you.</h1>
+                <p class="hero-subtext">Calculate fair tips in seconds, split bills with friends, and spin the wheel to decide who pays.</p>
+                <button class="cta-button" onclick="document.getElementById('calculator-section').scrollIntoView({ behavior: 'smooth' })">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Slot 1 -->
+    <div class="container">
+        <div class="ad-slot">Ad Space – 300x250</div>
+    </div>
+
+    <!-- Tip Calculator Section -->
+    <section id="calculator-section" class="section calculator-section">
+        <div class="container">
+            <h2>Tip Calculator</h2>
+            
+            <div class="calculator-grid">
+                <!-- Calculator Form -->
+                <div class="calculator-card">
+                    <form id="calculator-form" class="calculator-form">
+                        <!-- Bill Amount Input -->
+                        <div class="form-group">
+                            <label for="bill-amount">Bill Amount</label>
+                            <div class="input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input 
+                                    type="number" 
+                                    id="bill-amount" 
+                                    placeholder="0.00" 
+                                    min="0" 
+                                    step="0.01"
+                                    class="input-field"
+                                >
+                            </div>
+                            <span class="error-message" id="bill-error"></span>
+                        </div>
+
+                        <!-- Number of People Input -->
+                        <div class="form-group">
+                            <label for="num-people">Number of People</label>
+                            <input 
+                                type="number" 
+                                id="num-people" 
+                                placeholder="1" 
+                                min="1"
+                                value="1"
+                                class="input-field"
+                            >
+                            <span class="helper-message" id="people-helper"></span>
+                        </div>
+
+                        <!-- Tip Percentage Options -->
+                        <div class="form-group">
+                            <label>Tip Percentage</label>
+                            <div class="tip-buttons">
+                                <button type="button" class="tip-btn" data-tip="10">10%</button>
+                                <button type="button" class="tip-btn" data-tip="15">15%</button>
+                                <button type="button" class="tip-btn" data-tip="18">18%</button>
+                                <button type="button" class="tip-btn" data-tip="20">20%</button>
+                                <button type="button" class="tip-btn" data-tip="22">22%</button>
+                                <button type="button" class="tip-btn" data-tip="25">25%</button>
+                            </div>
+                        </div>
+
+                        <!-- Custom Tip Input -->
+                        <div class="form-group">
+                            <label for="custom-tip">Custom Tip %</label>
+                            <input 
+                                type="number" 
+                                id="custom-tip" 
+                                placeholder="Enter custom %" 
+                                min="0" 
+                                step="0.1"
+                                class="input-field"
+                            >
+                        </div>
+
+                        <!-- Calculate Button -->
+                        <button type="submit" class="calculate-button">Calculate Tip</button>
+                    </form>
+                </div>
+
+                <!-- Results Card -->
+                <div class="results-card" id="results-card" style="display: none;">
+                    <h3>Your Results</h3>
+                    <div class="result-item">
+                        <span class="result-label">Tip Amount</span>
+                        <span class="result-value" id="tip-amount">$0.00</span>
+                    </div>
+                    <div class="result-item highlight">
+                        <span class="result-label">Total with Tip</span>
+                        <span class="result-value" id="total-with-tip">$0.00</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Per Person Tip</span>
+                        <span class="result-value" id="per-person-tip">$0.00</span>
+                    </div>
+                    <div class="result-item highlight">
+                        <span class="result-label">Per Person Total</span>
+                        <span class="result-value" id="per-person-total">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Slot 2 -->
+    <div class="container">
+        <div class="ad-slot">Ad Space – 300x250</div>
+    </div>
+
+    <!-- Who Pays Spinner Section -->
+    <section class="section spinner-section">
+        <div class="container">
+            <h2>Who Pays the Bill?</h2>
+            <p class="section-subtitle">Add names and spin the wheel to decide who buys dinner.</p>
+
+            <div class="spinner-container">
+                <!-- Name Input & List -->
+                <div class="names-card">
+                    <div class="form-group">
+                        <label for="name-input">Add a Name</label>
+                        <div class="name-input-group">
+                            <input 
+                                type="text" 
+                                id="name-input" 
+                                placeholder="Enter name..." 
+                                class="input-field"
+                            >
+                            <button type="button" id="add-name-btn" class="add-name-button">Add</button>
+                        </div>
+                    </div>
+
+                    <div class="names-list" id="names-list">
+                        <!-- Names will be added here by JavaScript -->
+                    </div>
+
+                    <button 
+                        type="button" 
+                        id="spin-button" 
+                        class="spin-button"
+                        disabled
+                    >
+                        Spin the Wheel
+                    </button>
+                </div>
+
+                <!-- Spinner Wheel Visualization -->
+                <div class="wheel-container">
+                    <div class="wheel-pointer"></div>
+                    <div class="wheel" id="wheel">
+                        <svg class="wheel-svg" id="wheel-svg" viewBox="0 0 200 200">
+                            <!-- SVG segments will be generated by JavaScript -->
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Winner Display -->
+            <div class="winner-display" id="winner-display" style="display: none;">
+                <p class="winner-message"><span id="winner-name"></span> is paying this time!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Slot 3 -->
+    <div class="container">
+        <div class="ad-slot">Ad Space – 300x250</div>
+    </div>
+
+    <!-- Tipping 101 / FAQ Section -->
+    <section class="section faq-section">
+        <div class="container">
+            <h2>Tipping 101: A Quick Guide</h2>
+
+            <div class="tipping-guide">
+                <div class="guide-card">
+                    <h3>Restaurant Dining</h3>
+                    <p>For full-service restaurants, tipping 15–20% of the pre-tax bill is standard in the US. For exceptional service, consider 20–25%.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h3>Food Delivery</h3>
+                    <p>Delivery drivers typically expect $2–5 for small orders, or 10–15% of your total order value for larger orders.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h3>Coffee Shops & Cafes</h3>
+                    <p>A dollar or two is customary for simple transactions. For more complex drinks or large orders, 10–15% is appropriate.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h3>Large Groups & Auto-Gratuity</h3>
+                    <p>Many restaurants automatically add 18–20% gratuity for groups of 6 or more. Always check your receipt to avoid double-tipping.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h3>Bars & Cocktails</h3>
+                    <p>Tip $1–2 per drink at a bar, or 15–20% of your tab if you're running a tab.</p>
+                </div>
+
+                <div class="guide-card">
+                    <h3>Haircuts & Salons</h3>
+                    <p>Standard tipping is 15–20% of the service cost. For exceptional work, consider 20–25%.</p>
+                </div>
+            </div>
+
+            <div class="faq-section-inner">
+                <h3>Frequently Asked Questions</h3>
+
+                <div class="faq-item">
+                    <h4>How much should I tip for great service?</h4>
+                    <p>For outstanding service, 20–25% is a generous and appreciated tip. This acknowledges exceptional attentiveness, knowledge, and hospitality. Remember, servers often rely on tips as their primary income.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>How do I split the bill fairly with friends?</h4>
+                    <p>If everyone ordered similarly-priced items, splitting evenly is easiest. If there are significant differences, calculate each person's share based on what they ordered, then add their proportional tip. Our calculator makes this simple—just divide the total bill and tip amount by the number of people.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What if there's already a service charge on the bill?</h4>
+                    <p>If an automatic service charge (usually 18–20%) is already added, you are not obligated to tip further. However, if service was exceptional, an additional small tip (5–10%) is appreciated. Always read your bill carefully to avoid accidental double-tipping.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Is tipping mandatory?</h4>
+                    <p>Tipping is customary in many countries, especially the US, but not mandatory by law. That said, service workers often depend on tips to earn a living wage. We encourage tipping as a sign of appreciation for good service.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Do tipping customs differ by country?</h4>
+                    <p>Yes! Tipping customs vary widely. In the US, tipping is expected; in many European countries, service is included in the bill. Always research local customs when traveling or dining internationally.</p>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <p><strong>Disclaimer:</strong> Tipping customs and expectations vary by location, culture, and service type. Use this guide as a reference, but always follow local norms and your own judgment when deciding how much to tip. These are guidelines, not rules.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ad Slot 4 -->
+    <div class="container">
+        <div class="ad-slot">Ad Space – 300x250</div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <p>&copy; 2025 What Do I TIP. All rights reserved.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Use</a>
+                    <a href="cookies.html">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Notice Banner -->
+    <div class="cookie-banner" id="cookie-banner">
+        <div class="cookie-banner-content">
+            <p>This site uses cookies to improve your experience. By using this site, you accept our Cookie Policy.</p>
+            <button id="cookie-accept-btn" class="cookie-accept-btn">Accept</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
