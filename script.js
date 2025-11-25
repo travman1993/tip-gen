@@ -396,7 +396,7 @@ function initializeSpinner() {
         const totalRotation = (rotations * 360) + (360 - segmentCenter) + randomOffset;
 
         // Apply rotation animation to SVG
-        wheelSvg.style.transition = 'transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        wheelSvg.style.transition = 'transform 3s cubic-bezier(0.34, 1.56, 0.64, 1)';
         wheelSvg.style.transformOrigin = '50% 50%';
         wheelSvg.style.transform = `rotate(${totalRotation}deg)`;
 
